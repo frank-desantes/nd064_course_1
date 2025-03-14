@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   annotations:
   labels:
-    app: {{ .values.name }}
-  name: {{ .values.name }}
-  namespace: {{ .values.namespace.name }}
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace.name }}
 spec:
-  replicas: {{ .values.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .values.name }}
+      app: {{ .Values.name }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -19,23 +19,23 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .values.name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - image: frankdesantes/{{ .values.image.repository }}:{{ .values.image.tag }}
-        imagePullPolicy: {{ .values.image.pullPolicy }}
-        name: {{ .values.name }}
+      - image: frankdesantes/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Values.name }}
         ports:
-        - containerPort: {{ .values.containerPort }}
+        - containerPort: {{ .Values.containerPort }}
           protocol: TCP
         livenessProbe:
            httpGet:
              path: /healthz
-             port: {{ .values.containerPort }}
+             port: {{ .Values.containerPort }}
         readinessProbe:
            httpGet:
              path: /healthz
-             port: {{ .values.containerPort }}
+             port: {{ .Values.containerPort }}
         resources:
           requests:
             memory: "64Mi"
