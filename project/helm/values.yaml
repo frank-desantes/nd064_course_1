@@ -31,6 +31,3 @@ livenessProb:
 
 readinessProbe:
   path: /healthz
-
-configmap:
-  data: "version: alpine"
