@@ -110,5 +110,5 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(name)s:%(message)s')
+   logging.basicConfig(filename='techtrends-debug.log',level=logging.DEBUG, format='%(levelname)s:%(name)s:%(message)s')
    app.run(host='0.0.0.0', port='3111')
