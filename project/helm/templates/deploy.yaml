@@ -31,11 +31,11 @@ spec:
         livenessProbe:
            httpGet:
              path: /healthz
-             port: {{ .Values.containerPort }}
+             port: {{ .Values.livenessProbe.port }}
         readinessProbe:
            httpGet:
              path: /healthz
-             port: {{ .Values.containerPort }}
+             port: {{ .Values.readinessProbe.port }}
         resources:
           requests:
             memory: "64Mi"
