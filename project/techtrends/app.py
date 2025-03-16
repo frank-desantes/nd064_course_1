@@ -4,6 +4,7 @@ from flask import Flask, jsonify, json, render_template, request, url_for, redir
 from werkzeug.exceptions import abort
 
 import logging
+import sys
 import datetime
 
 # init all variables
@@ -110,5 +111,14 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   logging.basicConfig(filename='techtrends-debug.log',level=logging.DEBUG, format='%(levelname)s:%(name)s:%(message)s')
-   app.run(host='0.0.0.0', port='3111')
+    # create handler for stdout and stderror and add them to root logger 
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stdout_handler.setLevel(logging.DEBUG)
+    stderr_handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+    stdout_handler.setFormatter(formatter)
+    stderr_handler.setFormatter(formatter)
+    handlers = [stderr_handler, stdout_handler]    
+    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(name)s:%(message)s', handlers=handlers)
+    app.run(host='0.0.0.0', port='3111')
